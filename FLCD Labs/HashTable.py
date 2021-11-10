@@ -14,7 +14,10 @@ class HashTable:
         return sum % self.__size
 
     def add(self, key):
+        if self.contains(key):
+            return self.getPosition(key)
         self.__items[self.hash(key)].append(key)
+        return self.getPosition(key)
 
     def contains(self, key):
         return key in self.__items[self.hash(key)]
@@ -31,3 +34,9 @@ class HashTable:
             else:
                 break
         return (listPosition, listIndex)
+
+    def __str__(self) -> str:
+        result = "Symbol Table (kept as a Hash Table using LinkedLists)\n"
+        for i in range(self.__size):
+            result = result + str(i) + "->" + str(self.__items[i]) + "\n"
+        return result
